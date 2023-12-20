@@ -1,0 +1,114 @@
+<health-rules controller-version="023-009-001-000">
+    <health-rule>
+        <name>script - MQ PRDMG01 Queue Depth: PLACEHOLDER</name>
+        <type>OTHER</type>
+        <description/>
+        <enabled>true</enabled>
+        <is-default>false</is-default>
+        <always-enabled>true</always-enabled>
+        <duration-min>30</duration-min>
+        <wait-time-min>30</wait-time-min>
+        <affected-entities-match-criteria>
+            <other-affected-entities-match-criteria>
+                <entity>
+                    <entity-type>APPLICATION_COMPONENT_NODE</entity-type>
+                    <application-component-node>VSR-P-MWMQ1</application-component-node>
+                </entity>
+            </other-affected-entities-match-criteria>
+        </affected-entities-match-criteria>
+        <critical-execution-criteria>
+            <condition-aggregation-type>ALL</condition-aggregation-type>
+            <entity-aggregation-scope>
+                <type>ANY</type>
+                <value>0</value>
+            </entity-aggregation-scope>
+            <policy-condition>
+                <type>leaf</type>
+                <display-name>queue depth</display-name>
+                <short-name>A</short-name>
+                <condition-value-type>ABSOLUTE</condition-value-type>
+                <condition-value>90.0</condition-value>
+                <operator>GREATER_THAN</operator>
+                <condition-expression>100 - ((({maxQueueDepth} - {currQueueDepth}) / {maxQueueDepth}) * 100)</condition-expression>
+                <use-active-baseline>false</use-active-baseline>
+                <trigger-on-no-data>false</trigger-on-no-data>
+                <enable-triggers>true</enable-triggers>
+                <min-triggers>15</min-triggers>
+                <metric-expression>
+                    <type>boolean</type>
+                    <operator>MINUS</operator>
+                    <expression1>
+                        <type>leaf</type>
+                        <value>100</value>
+                        <is-literal-expression>true</is-literal-expression>
+                    </expression1>
+                    <expression2>
+                        <type>boolean</type>
+                        <operator>MULTIPLY</operator>
+                        <expression1>
+                            <type>boolean</type>
+                            <operator>DIVIDE</operator>
+                            <expression1>
+                                <type>boolean</type>
+                                <operator>MINUS</operator>
+                                <expression1>
+                                    <type>leaf</type>
+                                    <function-type>VALUE</function-type>
+                                    <value>0</value>
+                                    <is-literal-expression>false</is-literal-expression>
+                                    <display-name>maxQueueDepth</display-name>
+                                    <metric-definition>
+                                    <type>ABSOLUTE_METRIC_SCOPE</type>
+                                    <logical-metric-name>Application Infrastructure Performance|Root|MQ|Individual Nodes|VSR-P-MWMQ1|Custom Metrics|WebsphereMQ|PRDMG01|Queues|PLACEHOLDER|Max Queue Depth</logical-metric-name>
+                                    <metric-name>Custom Metrics|WebsphereMQ|PRDMG01|Queues|PLACEHOLDER|Max Queue Depth</metric-name>
+                                    <entity>
+                                    <entity-type>APPLICATION_COMPONENT_NODE</entity-type>
+                                    <application-component-node>VSR-P-MWMQ1</application-component-node>
+                                    </entity>
+                                    </metric-definition>
+                                </expression1>
+                                <expression2>
+                                    <type>leaf</type>
+                                    <function-type>VALUE</function-type>
+                                    <value>0</value>
+                                    <is-literal-expression>false</is-literal-expression>
+                                    <display-name>currQueueDepth</display-name>
+                                    <metric-definition>
+                                    <type>ABSOLUTE_METRIC_SCOPE</type>
+                                    <logical-metric-name>Application Infrastructure Performance|Root|MQ|Individual Nodes|VSR-P-MWMQ1|Custom Metrics|WebsphereMQ|PRDMG01|Queues|PLACEHOLDER|Current Queue Depth</logical-metric-name>
+                                    <metric-name>Custom Metrics|WebsphereMQ|PRDMG01|Queues|PLACEHOLDER|Current Queue Depth</metric-name>
+                                    <entity>
+                                    <entity-type>APPLICATION_COMPONENT_NODE</entity-type>
+                                    <application-component-node>VSR-P-MWMQ1</application-component-node>
+                                    </entity>
+                                    </metric-definition>
+                                </expression2>
+                            </expression1>
+                            <expression2>
+                                <type>leaf</type>
+                                <function-type>VALUE</function-type>
+                                <value>0</value>
+                                <is-literal-expression>false</is-literal-expression>
+                                <display-name>maxQueueDepth</display-name>
+                                <metric-definition>
+                                    <type>ABSOLUTE_METRIC_SCOPE</type>
+                                    <logical-metric-name>Application Infrastructure Performance|Root|MQ|Individual Nodes|VSR-P-MWMQ1|Custom Metrics|WebsphereMQ|PRDMG01|Queues|PLACEHOLDER|Max Queue Depth</logical-metric-name>
+                                    <metric-name>Custom Metrics|WebsphereMQ|PRDMG01|Queues|PLACEHOLDER|Max Queue Depth</metric-name>
+                                    <entity>
+                                    <entity-type>APPLICATION_COMPONENT_NODE</entity-type>
+                                    <application-component-node>VSR-P-MWMQ1</application-component-node>
+                                    </entity>
+                                </metric-definition>
+                            </expression2>
+                        </expression1>
+                        <expression2>
+                            <type>leaf</type>
+                            <value>100</value>
+                            <is-literal-expression>true</is-literal-expression>
+                        </expression2>
+                    </expression2>
+                </metric-expression>
+            </policy-condition>
+        </critical-execution-criteria>
+    </health-rule>
+</health-rules>
